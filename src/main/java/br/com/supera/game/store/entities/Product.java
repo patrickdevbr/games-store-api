@@ -29,7 +29,7 @@ public class Product implements Serializable {
 
 	@JsonIgnore
 	@OneToMany(mappedBy = "id.product")
-	private List<Order> orders = new ArrayList<>();
+	private List<OrderItem> orderItems = new ArrayList<>();
 
 	public Product() {
 	}
@@ -82,8 +82,8 @@ public class Product implements Serializable {
 		this.image = image;
 	}
 
-	public List<Order> getOrders() {
-		return orders;
+	public List<OrderItem> getOrderItems() {
+		return orderItems;
 	}
 
 	@Override

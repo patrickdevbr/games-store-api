@@ -15,7 +15,7 @@ public class OrderItem implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@EmbeddedId
-	private OrderItemPK id;	
+	private OrderItemPK id;
 	private Integer quantity;
 	private BigDecimal price;
 
@@ -59,6 +59,10 @@ public class OrderItem implements Serializable {
 
 	public void setPrice(BigDecimal price) {
 		this.price = price;
+	}
+
+	public BigDecimal subTotal() {
+		return price.multiply(BigDecimal.valueOf(quantity));
 	}
 
 	@Override
