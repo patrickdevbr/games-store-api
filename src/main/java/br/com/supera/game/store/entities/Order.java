@@ -8,16 +8,23 @@ import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
+@Table(name = "tb_order")
 public class Order implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue
 	private Long id;
-
 	private Instant moment;
+	
+	@JsonIgnore
+	@OneToMany(mappedBy = "id.order")
 	private List<OrderItem> items = new ArrayList<>();
 
 	public Order() {
