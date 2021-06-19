@@ -1,4 +1,4 @@
-package br.com.supera.game.store;
+package br.com.supera.game.store.requests;
 
 import java.math.BigDecimal;
 
