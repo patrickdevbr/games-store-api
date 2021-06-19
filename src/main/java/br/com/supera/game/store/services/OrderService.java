@@ -1,6 +1,10 @@
 package br.com.supera.game.store.services;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import br.com.supera.game.store.entities.Order;
@@ -19,6 +23,10 @@ public class OrderService {
 
 	@Autowired
 	private ShippingFeeService shippingFeeService;
+
+	public Page<Order> findAll(Pageable pageable) {
+		return repository.findAll(pageable);
+	}
 
 	public Order insert(Order order) {
 		order.setShippingFee(shippingFeeService.calculate(order));
@@ -42,10 +50,18 @@ public class OrderService {
 		return repository.save(order);
 	}
 
+	public Order addItems(Order order, List<OrderItem> items) {
+		items.forEach(item -> item.setOrder(order));
+		items = itemRepository.saveAll(items);
+		order.setShippingFee(shippingFeeService.calculate(order));
+		return repository.save(order);
+	}
+
 	public Order removeItem(Order order, OrderItem item) {
 		item.setOrder(order);
 		itemRepository.delete(item);
 		order.getItems().remove(item);
 		return order;
 	}
+
 }
