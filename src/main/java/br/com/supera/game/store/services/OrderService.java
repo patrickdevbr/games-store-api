@@ -45,14 +45,16 @@ public class OrderService {
 
 	public Order addItem(Order order, OrderItem item) {
 		item.setOrder(order);
-		item = itemRepository.save(item);
+		item = itemRepository.save(processItemAddition(order, item));
 		order.setShippingFee(shippingFeeService.calculate(order));
 		return repository.save(order);
 	}
 
 	public Order addItems(Order order, List<OrderItem> items) {
-		items.forEach(item -> item.setOrder(order));
-		items = itemRepository.saveAll(items);
+		items.forEach(item -> {
+			item.setOrder(order);
+			itemRepository.save(processItemAddition(order, item));
+		});
 		order.setShippingFee(shippingFeeService.calculate(order));
 		return repository.save(order);
 	}
@@ -62,6 +64,19 @@ public class OrderService {
 		itemRepository.delete(item);
 		order.getItems().remove(item);
 		return order;
+	}
+
+	private OrderItem processItemAddition(Order order, OrderItem item) {
+		int index = order.getItems().indexOf(item); // return -1 if does not exist
+		if (index != -1) {
+			OrderItem item2 = order.getItems().get(index);
+			Integer newQuantity = item.getQuantity() + item2.getQuantity();
+			item2.setQuantity(newQuantity);
+			return item2;
+		} else {
+			order.getItems().add(item);
+			return item;
+		}
 	}
 
 }
