@@ -20,7 +20,7 @@ public class TestConfig implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-		Product p1 = new Product(16L, "Super Mario Odyssey", BigDecimal.valueOf(197.88), (short) 100,
+		Product p1 = new Product(null, "Super Mario Odyssey", BigDecimal.valueOf(197.88), (short) 100,
 				"super-mario-odyssey.png");
 		Product p2 = new Product(null, "Call Of Duty Infinite Warfare", BigDecimal.valueOf(49.99), (short) 80,
 				"call-of-duty-infinite-warfare.png");
