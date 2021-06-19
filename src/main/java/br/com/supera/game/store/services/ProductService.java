@@ -1,6 +1,7 @@
 package br.com.supera.game.store.services;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import br.com.supera.game.store.entities.Product;
 import br.com.supera.game.store.repositories.ProductRepository;
+import br.com.supera.game.store.services.exceptions.ResourceNotFoundException;
 
 @Service
 public class ProductService {
@@ -25,6 +27,7 @@ public class ProductService {
 	}
 
 	public Product findById(Long id) {
-		return repository.findById(id).get();
+		Optional<Product> opt = repository.findById(id);
+		return opt.orElseThrow(() -> new ResourceNotFoundException(Product.class, id));
 	}
 }
