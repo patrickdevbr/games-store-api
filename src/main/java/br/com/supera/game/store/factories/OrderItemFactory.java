@@ -5,7 +5,7 @@ import org.springframework.stereotype.Component;
 
 import br.com.supera.game.store.entities.OrderItem;
 import br.com.supera.game.store.entities.Product;
-import br.com.supera.game.store.requests.OrderItemRequest;
+import br.com.supera.game.store.resources.requests.OrderItemRequest;
 import br.com.supera.game.store.services.ProductService;
 
 @Component

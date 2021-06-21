@@ -20,7 +20,7 @@ import br.com.supera.game.store.dto.OrderDTO;
 import br.com.supera.game.store.entities.Order;
 import br.com.supera.game.store.entities.OrderItem;
 import br.com.supera.game.store.factories.OrderItemFactory;
-import br.com.supera.game.store.requests.OrderItemRequest;
+import br.com.supera.game.store.resources.requests.OrderItemRequest;
 import br.com.supera.game.store.services.OrderService;
 
 @RestController

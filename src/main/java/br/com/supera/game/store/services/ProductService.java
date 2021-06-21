@@ -3,6 +3,8 @@ package br.com.supera.game.store.services;
 import java.util.List;
 import java.util.Optional;
 
+import javax.persistence.EntityNotFoundException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -30,4 +32,30 @@ public class ProductService {
 		Optional<Product> opt = repository.findById(id);
 		return opt.orElseThrow(() -> new ResourceNotFoundException(Product.class, id));
 	}
+
+	public Product insert(Product obj) {
+		return repository.save(obj);
+	}
+
+	public Product update(Long id, Product obj) {
+		try {
+			Product obj2 = repository.getById(id);
+			updateData(obj, obj2);
+			return repository.save(obj2);
+		} catch (EntityNotFoundException e) {
+			throw new ResourceNotFoundException(Product.class, id);
+		}
+	}
+
+	public void delete(Long id) {
+		repository.deleteById(id);
+	}
+
+	private void updateData(Product objFrom, Product objTo) {
+		objTo.setName(objFrom.getName());
+		objTo.setPrice(objFrom.getPrice());
+		objTo.setScore(objFrom.getScore());
+		objTo.setImage(objFrom.getImage());
+	}
+
 }

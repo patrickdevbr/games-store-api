@@ -19,7 +19,7 @@ import org.springframework.web.context.WebApplicationContext;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import br.com.supera.game.store.requests.OrderItemRequest;
+import br.com.supera.game.store.resources.requests.OrderItemRequest;
 
 @SpringBootTest
 public class OrderResourceTest {
