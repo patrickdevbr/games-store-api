@@ -43,6 +43,7 @@ java -jar games-store-0.0.1-SNAPSHOT
 - PostgresSQL 13.2.
 
 ## Endpoints REST
+Existe um exemplo de coleção de requisições que pode ser importada no Postman: [postman_collection](./supera-games-store.postman_collection.json)
 ### GET buscar produto 🟢
 Busca as informações de um produto na base de dados de acordo com o id informado na URL do endpoint.
 #### URL do recurso
