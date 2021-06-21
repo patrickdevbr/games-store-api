@@ -56,7 +56,7 @@ public class OrderResourceTest {
 					.contentType(MediaType.APPLICATION_JSON)
 					.content(requestJson)
 					.accept(MediaType.APPLICATION_JSON))
-			.andExpect(status().isOk());
+			.andExpect(status().isCreated());
 			// @formatter:on	
 		} catch (Exception e) {
 			fail(e.getClass().getSimpleName() + " -> " + e.getMessage());
