@@ -3,6 +3,9 @@
 ## Sobre o Projeto
 API com cadastro de jogos e processamento de pedidos de um ecommerce de games.
 
+## URL da aplicação
+[supera-games-store.herokuapp.com](https://supera-games-store.herokuapp.com)
+
 ## Modelo de domínio
 ![Modelo de domínio](https://github.com/Patrick-Ribeiro/games-store-API/blob/master/assets/Domain%20Model.JPG)
 ## Domínio de instância
