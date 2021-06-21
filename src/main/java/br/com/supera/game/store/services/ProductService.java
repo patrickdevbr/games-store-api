@@ -6,12 +6,15 @@ import java.util.Optional;
 import javax.persistence.EntityNotFoundException;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import br.com.supera.game.store.entities.Product;
 import br.com.supera.game.store.repositories.ProductRepository;
+import br.com.supera.game.store.services.exceptions.DatabaseIntegrityException;
 import br.com.supera.game.store.services.exceptions.ResourceNotFoundException;
 
 @Service
@@ -48,7 +51,13 @@ public class ProductService {
 	}
 
 	public void delete(Long id) {
-		repository.deleteById(id);
+		try {
+			repository.deleteById(id);
+		} catch (EmptyResultDataAccessException e) {
+			throw new ResourceNotFoundException(Product.class, id);
+		} catch (DataIntegrityViolationException e) {
+			throw new DatabaseIntegrityException(e.getMessage());
+		}
 	}
 
 	private void updateData(Product objFrom, Product objTo) {
