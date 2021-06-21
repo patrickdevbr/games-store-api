@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import br.com.supera.game.store.dto.ProductDTO;
 import br.com.supera.game.store.entities.Product;
 import br.com.supera.game.store.services.ProductService;
 
@@ -29,17 +30,17 @@ public class ProductResource {
 	private ProductService service;
 
 	@PostMapping
-	public ResponseEntity<Product> insert(@RequestBody Product product) {
+	public ResponseEntity<ProductDTO> insert(@RequestBody Product product) {
 		product = service.insert(product);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(product.getId())
 				.toUri();
-		return ResponseEntity.created(uri).body(product);
+		return ResponseEntity.created(uri).body(new ProductDTO(product));
 	}
 
 	@PutMapping(value = "/{id}")
-	public ResponseEntity<Product> update(@PathVariable Long id, @RequestBody Product product) {
+	public ResponseEntity<ProductDTO> update(@PathVariable Long id, @RequestBody Product product) {
 		product = service.update(id, product);
-		return ResponseEntity.ok(product);
+		return ResponseEntity.ok(new ProductDTO(product));
 	}
 
 	@DeleteMapping(value = "/{id}")
@@ -54,7 +55,7 @@ public class ProductResource {
 	}
 
 	@GetMapping
-	public ResponseEntity<Page<Product>> findAll(
+	public ResponseEntity<Page<ProductDTO>> findAll(
 			@RequestParam(value = "sortby", required = false, defaultValue = "name") String sortby,
 			@RequestParam(value = "descending", required = false, defaultValue = "false") Boolean descending,
 			@RequestParam(value = "page", required = false, defaultValue = "0") Integer page,
@@ -64,7 +65,8 @@ public class ProductResource {
 				: PageRequest.of(page, limit, Sort.by(sortby.toLowerCase()));
 
 		Page<Product> products = service.findAll(pgRequest);
-		return ResponseEntity.ok().body(products);
+		Page<ProductDTO> dto = products.map(p -> new ProductDTO(p));
+		return ResponseEntity.ok().body(dto);
 	}
 
 }
