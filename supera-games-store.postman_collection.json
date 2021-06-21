@@ -1,0 +1,294 @@
+{
+	"info": {
+		"_postman_id": "fd44f740-2e15-44b6-907f-f3f5f0e3d3ea",
+		"name": "supera-games-store",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Product",
+			"item": [
+				{
+					"name": "Insert product",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\" : \"Crash Titans\",\r\n    \"price\" : 39.39,\r\n    \"score\" : 310,\r\n    \"image\" : \"crash-titans.png\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://supera-games-store.herokuapp.com/products",
+							"protocol": "https",
+							"host": [
+								"supera-games-store",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"products"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Find single product",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://supera-games-store.herokuapp.com/products/1",
+							"protocol": "https",
+							"host": [
+								"supera-games-store",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"products",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Find all products",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://supera-games-store.herokuapp.com/products",
+							"protocol": "https",
+							"host": [
+								"supera-games-store",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"products"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update product",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\" : \"Valorant\",\r\n    \"price\" : 89.9,\r\n    \"score\" : 100,\r\n    \"image\" : \"valorant-atualizado.png\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://supera-games-store.herokuapp.com/products/10",
+							"protocol": "https",
+							"host": [
+								"supera-games-store",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"products",
+								"10"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete product",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "https://supera-games-store.herokuapp.com/products/2",
+							"protocol": "https",
+							"host": [
+								"supera-games-store",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"products",
+								"2"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Order",
+			"item": [
+				{
+					"name": "Insert oder",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "[\r\n    {\r\n        \"productId\": 2,\r\n        \"quantity\": 1,\r\n        \"price\": 189.98\r\n    },\r\n    {\r\n        \"productId\": 8,\r\n        \"quantity\": 2,\r\n        \"price\": 204.39\r\n    },\r\n    {\r\n        \"productId\": 4,\r\n        \"quantity\": 1\r\n    }\r\n]",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://supera-games-store.herokuapp.com/orders",
+							"protocol": "https",
+							"host": [
+								"supera-games-store",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"orders"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Find all orders",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://supera-games-store.herokuapp.com/orders?limit=2&page=0",
+							"protocol": "https",
+							"host": [
+								"supera-games-store",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"orders"
+							],
+							"query": [
+								{
+									"key": "limit",
+									"value": "2"
+								},
+								{
+									"key": "page",
+									"value": "0"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Find single order",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://supera-games-store.herokuapp.com/orders/1",
+							"protocol": "https",
+							"host": [
+								"supera-games-store",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"orders",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add item",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "[\r\n    {\r\n        \"productId\": 4,\r\n        \"quantity\": 2,\r\n        \"price\": 69.83\r\n    },\r\n    {\r\n        \"productId\": 1,\r\n        \"quantity\": 2,\r\n        \"price\": 189.98\r\n    }\r\n]",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://supera-games-store.herokuapp.com/orders/1/items",
+							"protocol": "https",
+							"host": [
+								"supera-games-store",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"orders",
+								"1",
+								"items"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Remove Item",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"productId\": 1,\r\n    \"price\": 189.98\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://supera-games-store.herokuapp.com/orders/1/items",
+							"protocol": "https",
+							"host": [
+								"supera-games-store",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"orders",
+								"1",
+								"items"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
