@@ -2,7 +2,6 @@ package br.com.supera.game.store.resources;
 
 import java.time.Instant;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -61,15 +60,11 @@ public class OrderResource {
 	}
 
 	@PostMapping(value = "{id}/items")
-	public ResponseEntity<OrderDTO> addItem(@PathVariable Long id, @RequestBody List<OrderItemRequest> items) {
-		// @formatter:off
-		List<OrderItem> oiList = items.stream()
-				.map(i -> itemFactory.createFromRequest(i))
-				.collect(Collectors.toList());
-		// @formatter:on
+	public ResponseEntity<OrderDTO> addItem(@PathVariable Long id, @RequestBody OrderItemRequest item) {
+		OrderItem oi = itemFactory.createFromRequest(item);
 		Order order = service.findById(id);
 
-		service.addItems(order, oiList);
+		service.addItem(order, oi);
 		return ResponseEntity.ok(new OrderDTO(order));
 	}
 
